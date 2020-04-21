@@ -16,6 +16,7 @@ public class EvenIterator implements Iterator {
         boolean rsl = false;
         for (int i = index; i < array.length; i++) {
             if (array[i] % 2 == 0) {
+                index = i;
                 rsl = true;
                 break;
             }
@@ -25,22 +26,18 @@ public class EvenIterator implements Iterator {
 
     @Override
     public Object next() {
-        Object rsl = null;
-        for (int i = index; i < array.length; i++) {
-            if (array[i] % 2 == 0) {
-                rsl = array[i];
-                index = i + 1;
-                break;
-            }
-        }
-        if (rsl == null){
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        return rsl;
-    }
-
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
+//        Object rsl = null;
+//        for (int i = index; i < array.length; i++) {
+//            if (array[i] % 2 == 0) {
+//                rsl = array[i];
+//                index = i + 1;
+//                break;
+//
+//            }
+//        }
+        return array[index++];
     }
 }
