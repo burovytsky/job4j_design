@@ -1,6 +1,7 @@
 package ru.job4j.generic;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objects;
@@ -19,10 +20,16 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T get(int position) {
+        if(position >= objects.length){
+            throw new ArrayIndexOutOfBoundsException();
+        }
         return (T) this.objects[position];
     }
 
     public void set(int position, T element) {
+        if(position >= objects.length){
+            throw new ArrayIndexOutOfBoundsException();
+        }
         this.objects[position] = element;
     }
 
@@ -43,6 +50,9 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public T next() {
+                if(!hasNext()){
+                    throw new NoSuchElementException();
+                }
                 return (T) objects[indexForIterator++];
             }
         };
