@@ -18,7 +18,7 @@ public class ContainerTest {
     }
 
     @Test
-    public void whenIteratorNext() {
+    public void whenIteratorNextShouldReturnNextItem() {
         Container<String> container = new Container();
         container.add("testString1");
         container.add("testString2");
@@ -30,7 +30,6 @@ public class ContainerTest {
     @Test
     public void whenIteratorHasNextShouldReturnFalse() {
         Container<String> container = new Container();
-        container.add("s1");
         boolean rsl = container.iterator().hasNext();
         assertThat(rsl, is(false));
     }
