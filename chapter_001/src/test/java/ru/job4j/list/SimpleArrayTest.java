@@ -39,6 +39,13 @@ public class SimpleArrayTest {
         array.get(1);
     }
 
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void whenGetNegativeNumber() {
+        SimpleArray<String> array = new SimpleArray<>();
+        array.add("first");
+        array.get(-1);
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void whenGetEmptyFromIt() {
         SimpleArray<String> array = new SimpleArray<>();

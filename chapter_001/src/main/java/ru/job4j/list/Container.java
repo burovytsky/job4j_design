@@ -6,43 +6,42 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class Container<E> implements Iterable {
-    private Node<E> firstNode;
-    private Node<E> lastNode;
+public class Container<E> implements Iterable<E> {
+    private Node<E> first;
+    private Node<E> last;
     private int size = 0;
     private int modCount = 0;
-    private int expectedModCount = 0;
 
     public Container() {
-        this.lastNode = new Node(firstNode, null, null);
-        this.firstNode = new Node(null, null, lastNode);
+        this.last = new Node(first, null, null);
+        this.first = new Node(null, null, last);
     }
 
     public void add(E value) {
-        Node<E> lastTemp = lastNode;
-        lastTemp.currentElement = value;
-        lastNode = new Node(lastTemp, null, null);
-        lastTemp.nextElement = lastNode;
+        Node<E> lastTemp = last;
+        lastTemp.element = value;
+        last = new Node(lastTemp, null, null);
+        lastTemp.next = last;
         size++;
         modCount++;
     }
 
     public E get(int index) {
         Objects.checkIndex(index, size);
-        Node<E> target = firstNode.nextElement;
+        Node<E> target = first.next;
         for (int i = 0; i < index; i++) {
             target = getNextElement(target);
         }
-        return target.currentElement;
+        return target.element;
     }
 
     private Node<E> getNextElement(Node<E> currentElement) {
-        return currentElement.nextElement;
+        return currentElement.next;
     }
 
     @Override
     public Iterator iterator() {
-        expectedModCount = modCount;
+        int expectedModCount = modCount;
         return new Iterator<E>() {
             int iteratorCounter = 0;
 
@@ -68,14 +67,14 @@ public class Container<E> implements Iterable {
     }
 
     private static class Node<E> {
-        E currentElement;
-        Node<E> nextElement;
-        Node<E> prevElement;
+        E element;
+        Node<E> next;
+        Node<E> prev;
 
-        public Node(Node<E> prevElement, E currentElement, Node<E> nextElement) {
-            this.currentElement = currentElement;
-            this.nextElement = nextElement;
-            this.prevElement = prevElement;
+        public Node(Node<E> prev, E element, Node<E> next) {
+            this.element = element;
+            this.next = next;
+            this.prev = prev;
         }
     }
 }
