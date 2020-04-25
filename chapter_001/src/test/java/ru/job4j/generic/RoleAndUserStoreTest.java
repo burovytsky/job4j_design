@@ -11,7 +11,7 @@ public class RoleAndUserStoreTest {
 
     @Test
     public void whenReplaceElementShouldReturnNewElement() {
-        AbstractStore<Role> roleStore = new RoleStore();
+        RoleStore roleStore = new RoleStore();
         Role role1 = new Role("id1");
         Role role2 = new Role("id2");
         Role role3 = new Role("newRole");
@@ -23,17 +23,17 @@ public class RoleAndUserStoreTest {
 
     @Test
     public void whenAddElementShouldReturnElement() {
-        AbstractStore<User> userAbstractStore = new UserStore();
+        UserStore userStore = new UserStore();
         User role1 = new User("id1");
         User role2 = new User("id2");
-        userAbstractStore.add(role1);
-        userAbstractStore.add(role2);
-        assertThat(userAbstractStore.findById("id2"), is(role2));
+        userStore.add(role1);
+        userStore.add(role2);
+        assertThat(userStore.findById("id2"), is(role2));
     }
 
     @Test(expected = NoSuchElementException.class)
     public void whenDeleteShouldReturnNull() {
-        AbstractStore<Role> roleStore = new RoleStore();
+        RoleStore roleStore = new RoleStore();
         roleStore.add(new Role("id1"));
         roleStore.add(new Role("id2"));
         roleStore.delete("id2");
