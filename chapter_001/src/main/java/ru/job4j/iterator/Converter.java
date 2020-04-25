@@ -12,7 +12,7 @@ public class Converter {
             @Override
             public boolean hasNext() {
                 boolean rsl = false;
-                if (it.hasNext() && !iterator.hasNext()) {
+                while (it.hasNext() && !iterator.hasNext()) {
                     iterator = it.next();
                 }
                 if (iterator != null) {
@@ -25,9 +25,6 @@ public class Converter {
             public Integer next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                if (!iterator.hasNext()) {
-                    iterator = it.next();
                 }
                 return iterator.next();
             }
