@@ -6,53 +6,52 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class SimpleArray<T> implements Iterable<T> {
-    private Object[] objects;
-    private int indexForArray = 0;
-    private int indexForIterator = 0;
+    private Object[] objects = new Object[10];
+    private int index = 0;
+    private int point = 0;
     private int modCount = 0;
-    private int expectedModCount = 0;
-
-    public SimpleArray() {
-        this.objects = new Object[10];
-    }
 
     public void add(T element) {
-        if (indexForArray >= objects.length) {
+        if (index >= objects.length) {
             int newSize = (int) (objects.length + objects.length * 1.5);
             objects = Arrays.copyOf(objects, newSize);
         }
-        this.objects[indexForArray++] = element;
+        this.objects[index++] = element;
         modCount++;
     }
 
     public T get(int position) {
-        if ((T) this.objects[position] == null) {
+        if (position < 0 || position >= objects.length) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        Object target = this.objects[position];
+        if ((T) target == null) {
             throw new NoSuchElementException();
         }
-        return (T) this.objects[position];
+        return (T) target;
     }
 
     @Override
     public Iterator<T> iterator() {
-        expectedModCount = modCount;
+        int expectedModCount = modCount;
         return new Iterator<T>() {
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return objects.length > indexForIterator;
+                return objects.length > point;
             }
 
             @Override
             public T next() {
-                if (!hasNext() || objects[indexForIterator] == null) {
+                if (!hasNext() || objects[point] == null) {
                     throw new NoSuchElementException();
                 }
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return (T) objects[indexForIterator++];
+                return (T) objects[point++];
             }
         };
     }
