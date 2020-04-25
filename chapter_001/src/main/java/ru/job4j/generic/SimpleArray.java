@@ -5,29 +5,29 @@ import java.util.NoSuchElementException;
 
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objects;
-    private int indexForArray = 0;
-    private int indexForIterator = 0;
+    private int index = 0;
+    private int point = 0;
 
     public SimpleArray(int size) {
         this.objects = new Object[size];
     }
 
     public void add(T element) {
-        if (indexForArray > objects.length) {
+        if (index > objects.length) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        this.objects[indexForArray++] = element;
+        this.objects[index++] = element;
     }
 
     public T get(int position) {
-        if(position >= objects.length){
+        if (position >= objects.length || position < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
         return (T) this.objects[position];
     }
 
     public void set(int position, T element) {
-        if(position >= objects.length){
+        if (position >= objects.length || position < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
         this.objects[position] = element;
@@ -45,15 +45,15 @@ public class SimpleArray<T> implements Iterable<T> {
         return new Iterator<T>() {
             @Override
             public boolean hasNext() {
-                return objects.length > indexForIterator;
+                return objects.length > point;
             }
 
             @Override
             public T next() {
-                if(!hasNext()){
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (T) objects[indexForIterator++];
+                return (T) objects[point++];
             }
         };
     }
