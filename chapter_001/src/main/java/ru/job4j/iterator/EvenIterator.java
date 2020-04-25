@@ -29,15 +29,6 @@ public class EvenIterator implements Iterator {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-//        Object rsl = null;
-//        for (int i = index; i < array.length; i++) {
-//            if (array[i] % 2 == 0) {
-//                rsl = array[i];
-//                index = i + 1;
-//                break;
-//
-//            }
-//        }
         return array[index++];
     }
 }
