@@ -14,7 +14,7 @@ public class SimpleSetTest {
         SimpleSet<String> array = new SimpleSet<>();
         array.add("first");
         Iterator<String> iterator = array.iterator();
-        assertThat(iterator.next(), is("second"));
+        assertThat(iterator.next(), is("first"));
     }
 
     @Test(expected = NoSuchElementException.class)
