@@ -1,7 +1,6 @@
 package ru.job4j.set;
 
 import ru.job4j.list.SimpleArray;
-
 import java.util.Iterator;
 
 public class SimpleSet<E> implements Iterable<E> {
