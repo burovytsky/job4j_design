@@ -1,6 +1,7 @@
 package ru.job4j.set;
 
 import ru.job4j.list.SimpleArray;
+
 import java.util.Iterator;
 
 public class SimpleSet<E> implements Iterable<E> {
@@ -10,17 +11,23 @@ public class SimpleSet<E> implements Iterable<E> {
     public void add(E element) {
         boolean rsl = true;
         if (size != 0) {
-            for (int i = 0; i < size; i++) {
-                if (simpleArray.get(i).equals(element)) {
-                    rsl = false;
-                    break;
-                }
-            }
+            rsl = contains(element);
         }
         if (rsl) {
             simpleArray.add(element);
             size++;
         }
+    }
+
+    public boolean contains(E element) {
+        boolean rsl = true;
+        for (int i = 0; i < size; i++) {
+            if (simpleArray.get(i).equals(element)) {
+                rsl = false;
+                break;
+            }
+        }
+        return rsl;
     }
 
     @Override
