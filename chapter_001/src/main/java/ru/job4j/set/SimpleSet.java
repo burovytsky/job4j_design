@@ -11,7 +11,7 @@ public class SimpleSet<E> implements Iterable<E> {
     public void add(E element) {
         boolean rsl = true;
         if (size != 0) {
-            rsl = contains(element);
+            rsl = !contains(element);
         }
         if (rsl) {
             simpleArray.add(element);
@@ -20,10 +20,10 @@ public class SimpleSet<E> implements Iterable<E> {
     }
 
     public boolean contains(E element) {
-        boolean rsl = true;
+        boolean rsl = false;
         for (int i = 0; i < size; i++) {
             if (simpleArray.get(i).equals(element)) {
-                rsl = false;
+                rsl = true;
                 break;
             }
         }
