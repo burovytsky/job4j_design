@@ -29,4 +29,14 @@ public class SimpleSetTest {
         iterator.next();
     }
 
+    @Test
+    public void whenContainsShouldReturnTrue() {
+        SimpleSet<String> array = new SimpleSet<>();
+        array.add("first");
+        array.add("second");
+        array.add("third");
+        array.add("third");
+        assertThat(array.contains("second"), is(true));
+    }
+
 }
