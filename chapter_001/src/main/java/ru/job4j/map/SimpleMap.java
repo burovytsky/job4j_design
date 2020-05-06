@@ -8,9 +8,8 @@ import java.util.NoSuchElementException;
 public class SimpleMap<K, V> implements Iterable<SimpleMap.Node<K, V>> {
     private Node<K, V>[] table = new Node[16];
     private int size;
-    private int arrayLength  = table.length;
     private int modCount;
-    private float threshold =  arrayLength * 0.75f;
+    private float threshold =  table.length * 0.75f;
 
     public boolean insert(K key, V value) {
         int hash = hash(key);
@@ -58,9 +57,8 @@ public class SimpleMap<K, V> implements Iterable<SimpleMap.Node<K, V>> {
 
     private void tableDoubling() {
             Node<K, V>[] oldTable = table;
-            table = new Node[arrayLength * 2];
-            arrayLength = table.length;
-            threshold = arrayLength * 0.75f;
+            table = new Node[table.length * 2];
+            threshold = table.length * 0.75f;
             for (Node node : oldTable) {
                 if (node != null) {
                     table[forIndex(node.hash)] = node;
@@ -69,7 +67,7 @@ public class SimpleMap<K, V> implements Iterable<SimpleMap.Node<K, V>> {
     }
 
     private int forIndex(int hash) {
-        return (arrayLength - 1) & hash;
+        return (table.length - 1) & hash;
     }
 
     static final int hash(Object key) {
