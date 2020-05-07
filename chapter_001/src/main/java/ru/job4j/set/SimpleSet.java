@@ -9,11 +9,7 @@ public class SimpleSet<E> implements Iterable<E> {
     private int size = 0;
 
     public void add(E element) {
-        boolean rsl = true;
-        if (size != 0) {
-            rsl = !contains(element);
-        }
-        if (rsl) {
+        if (!contains(element)) {
             simpleArray.add(element);
             size++;
         }
@@ -21,12 +17,22 @@ public class SimpleSet<E> implements Iterable<E> {
 
     public boolean contains(E element) {
         boolean rsl = false;
+        if (size == 0) {
+            return false;
+        }
         for (int i = 0; i < size; i++) {
             if (simpleArray.get(i).equals(element)) {
                 rsl = true;
                 break;
             }
         }
+//        Iterator<E> it = simpleArray.iterator();
+//        while (it.hasNext()) {
+//            if (it.next().equals(element)) {
+//                rsl = true;
+//                break;
+//            }
+//        }
         return rsl;
     }
 
