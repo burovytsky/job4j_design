@@ -2,27 +2,24 @@ package ru.job4j.generic;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objects;
     private int index = 0;
-    private int point = 0;
+    private int modCount = 0;
 
     public SimpleArray(int size) {
         this.objects = new Object[size];
     }
 
     public void add(T element) {
-        if (index > objects.length) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
         this.objects[index++] = element;
+        modCount++;
     }
 
     public T get(int position) {
-        if (position >= objects.length || position < 0) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
+        Objects.checkIndex(position, objects.length);
         return (T) this.objects[position];
     }
 
@@ -34,15 +31,13 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void remove(int position) {
-        for (int i = position; i < objects.length - 1; i++) {
-            objects[i] = objects[i + 1];
-        }
-        objects[objects.length - 1] = null;
+        System.arraycopy(objects, position + 1, objects, position, objects.length - 1 - position);
     }
 
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
+            private int point = 0;
             @Override
             public boolean hasNext() {
                 return objects.length > point;
