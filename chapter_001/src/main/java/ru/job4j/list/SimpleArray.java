@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objects = new Object[10];
     private int index = 0;
-    private int point = 0;
     private int modCount = 0;
 
     public void add(T element) {
@@ -21,9 +20,6 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T get(int position) {
-        if (position < 0 || position >= objects.length) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
         Object target = this.objects[position];
         if ((T) target == null) {
             throw new NoSuchElementException();
@@ -35,12 +31,13 @@ public class SimpleArray<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         int expectedModCount = modCount;
         return new Iterator<T>() {
+            int point = 0;
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return objects.length > point;
+                return index > point;
             }
 
             @Override
