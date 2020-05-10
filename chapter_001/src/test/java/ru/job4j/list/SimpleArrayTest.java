@@ -26,20 +26,14 @@ public class SimpleArrayTest {
         assertThat(rsl, is("first"));
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void whenGetEmpty() {
-        SimpleArray<String> array = new SimpleArray<>();
-        array.get(0);
-    }
-
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenGetOutBound() {
         SimpleArray<String> array = new SimpleArray<>();
         array.add("first");
         array.get(1);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenGetNegativeNumber() {
         SimpleArray<String> array = new SimpleArray<>();
         array.add("first");

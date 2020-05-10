@@ -1,5 +1,6 @@
 package ru.job4j.generic;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -19,27 +20,33 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T get(int position) {
-        Objects.checkIndex(position, objects.length);
+        Objects.checkIndex(position, index);
         return (T) this.objects[position];
     }
 
     public void set(int position, T element) {
-        if (position >= objects.length || position < 0) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
+        Objects.checkIndex(position, index);
         this.objects[position] = element;
     }
 
     public void remove(int position) {
-        System.arraycopy(objects, position + 1, objects, position, objects.length - 1 - position);
+        Objects.checkIndex(position, index);
+        System.arraycopy(objects, position + 1, objects, position,  index - 1 - position);
+        objects[objects.length - 1] = null;
+        index--;
+        modCount++;
     }
 
     @Override
     public Iterator<T> iterator() {
+        int expectedModCount = modCount;
         return new Iterator<T>() {
             private int point = 0;
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return objects.length > point;
             }
 
