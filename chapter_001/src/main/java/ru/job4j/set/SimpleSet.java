@@ -5,21 +5,19 @@ import ru.job4j.list.SimpleArray;
 import java.util.Iterator;
 
 public class SimpleSet<E> implements Iterable<E> {
-    private final SimpleArray<E> simpleArray = new SimpleArray<>();
+    private final SimpleArray<E> set = new SimpleArray<>();
 
     public void add(E element) {
         if (!contains(element)) {
-            simpleArray.add(element);
+            set.add(element);
         }
     }
 
     public boolean contains(E element) {
         boolean rsl = false;
-        Iterator<E> it = simpleArray.iterator();
-        while (it.hasNext()) {
-            if (it.next().equals(element)) {
+        for (E setElement : set) {
+            if (element.equals(setElement)) {
                 rsl = true;
-                break;
             }
         }
         return rsl;
@@ -27,6 +25,6 @@ public class SimpleSet<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return simpleArray.iterator();
+        return set.iterator();
     }
 }
