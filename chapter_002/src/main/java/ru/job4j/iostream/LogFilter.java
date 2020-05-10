@@ -1,7 +1,6 @@
 package ru.job4j.iostream;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,19 @@ public class LogFilter {
         return logs;
     }
 
+    public static void save(List<String> log, String file) {
+        try (PrintWriter out = new PrintWriter(
+                new BufferedOutputStream(
+                        new FileOutputStream(file)
+                ))) {
+            for (String str : log) {
+                out.write(str + System.lineSeparator());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private static boolean isPenultimate404(String string) {
         String[] array = string.split(" ");
         return array[array.length - 2].equals("404");
@@ -23,6 +35,6 @@ public class LogFilter {
 
     public static void main(String[] args) {
         List<String> log = filter("log.txt");
-        log.forEach(System.out::println);
+        save(log, "404.txt");
     }
 }
