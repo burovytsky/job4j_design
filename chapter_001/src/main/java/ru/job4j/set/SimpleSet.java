@@ -18,6 +18,7 @@ public class SimpleSet<E> implements Iterable<E> {
         for (E setElement : set) {
             if (element.equals(setElement)) {
                 rsl = true;
+                break;
             }
         }
         return rsl;
