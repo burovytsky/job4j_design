@@ -30,8 +30,7 @@ public class Config {
     private static boolean stringsFilter(String string) {
         boolean rsl = false;
         if (!string.isEmpty()) {
-            String first = String.valueOf(string.charAt(0));
-            rsl = string.contains("=") && !first.equals("#");
+            rsl = string.contains("=") && !string.startsWith("#");
         }
         return rsl;
     }
