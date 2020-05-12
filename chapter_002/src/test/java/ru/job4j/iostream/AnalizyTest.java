@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 
 public class AnalizyTest {
 
-
     @Rule
     public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
@@ -27,7 +26,7 @@ public class AnalizyTest {
             out.println("500 11:01:02");
             out.println("200 11:02:02");
         }
-        Analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
+        new Analizy().unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         try (BufferedReader read = new BufferedReader(new FileReader(target))
         ) {
             assertThat(read.readLine(), is("10:57:01;10:59:01"));
