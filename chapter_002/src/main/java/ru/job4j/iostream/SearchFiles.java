@@ -11,8 +11,8 @@ import java.util.function.Predicate;
 import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class SearchFiles extends SimpleFileVisitor<Path> {
-    List<Path> rsl = new ArrayList<>();
-    Predicate<Path> predicate;
+    private List<Path> rsl = new ArrayList<>();
+    private Predicate<Path> predicate;
 
     public SearchFiles(Predicate<Path> predicate) {
         this.predicate = predicate;
