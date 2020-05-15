@@ -1,0 +1,5 @@
+A Thread can be called a lightweight process. Java supports multithreading, so it allows our application to perform two or
+more task concurrently. All Java programs have at least one thread, known as the main thread, which is created by the Java
+Virtual Machine (JVM) at the program start when the main() method is invoked with the main thread.
+There are two ways to create a thread in Java, by extending a Thread class or else by implementing the Runnable interface.
+We can also create a thread without implementing the Runnable interface in the below program

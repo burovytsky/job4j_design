@@ -1,0 +1,16 @@
+user: тест
+pc:when
+user: чата
+pc:program
+user: стоп
+user: па
+user: са
+user: продолжить
+user: можно
+pc:can
+user: можно
+pc:Java
+user: сто
+pc:implementing
+user: закончить
+pc:at
