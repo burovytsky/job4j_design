@@ -11,37 +11,35 @@ public class Analizy {
     private boolean isRecorded = false;
 
     public void unavailable(String source, String target) {
-        Map<String, String> logs = new TreeMap<>();
         try (BufferedReader in = new BufferedReader(new FileReader(source))) {
             in.lines()
                     .map(s -> s.split(" "))
-                    .forEach(strings -> logs.put(strings[1], strings[0]));
-
-            for (Map.Entry<String, String> entry : logs.entrySet()) {
-                if ((entry.getValue().equals("400") || entry.getValue().equals("500")) && !isRecorded) {
-                    rsl.add(entry.getKey() + ";");
-                    isRecorded = true;
-                } else if ((entry.getValue().equals("200") || entry.getValue().equals("300")) && isRecorded) {
-                    rsl.add(entry.getKey());
-                    isRecorded = false;
-                }
-            }
+                    .forEach(this::filterData);
+            recordResult(target);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        recordResult(rsl, target);
+
+    }
+    private void recordResult(String target) {
+        try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))) {
+            for (String info : rsl) {
+                out.write(info);
+            }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }
 
-    private void recordResult(List<String> list, String target) {
-        try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))) {
-            for (String str : list) {
-                out.write(str);
-                if (!str.endsWith(";")) {
-                    out.write(System.lineSeparator());
-                }
+    private void filterData(String[] arr) {
+            String status = arr[0];
+            String time = arr[1];
+            if ((status.equals("400") || status.equals("500")) && !isRecorded) {
+                rsl.add(time + ";");
+                isRecorded = true;
+            } else if ((status.equals("200") || status.equals("300")) && isRecorded) {
+                rsl.add(time + System.lineSeparator());
+                isRecorded = false;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
