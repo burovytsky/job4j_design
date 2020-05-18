@@ -24,8 +24,9 @@ public class Zip {
 
     public static void main(String[] args) throws IOException {
         ArgZip argZip = new ArgZip(args);
-        List<File> list = Search.search(Paths.get(argZip.directory()), argZip.exclude())
-                .stream().map(Path::toFile)
+        List<File> list = Search.search(Paths.get(argZip.directory()), "")
+                .stream()
+                .map(Path::toFile).filter(file -> !file.getAbsolutePath().endsWith(argZip.exclude()))
                 .collect(Collectors.toList());
         new Zip().packFiles(list, new File(argZip.output()));
     }

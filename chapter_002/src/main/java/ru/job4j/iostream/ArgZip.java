@@ -1,40 +1,41 @@
 package ru.job4j.iostream;
 
-import java.util.Arrays;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArgZip {
     private final String[] args;
+    private Map<String, String> arguments = new HashMap<>();
 
     public ArgZip(String[] args) {
         this.args = args;
+        parseArguments();
     }
 
-    public boolean valid(String argument) {
-        return Arrays.asList(args).contains(argument);
+
+    public boolean valid() {
+        return args.length == 6 && (args[0].equals("-d") && args[2].equals("-e") && args[4].equals("-o"));
     }
 
-    private String getArgument(String argument) {
-        String rsl = null;
-        if (!valid(argument)) {
+    private void parseArguments() {
+        if (!valid()) {
             throw new IllegalArgumentException("invalid startup options");
         }
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].equals(argument)) {
-                rsl = args[i + 1];
-            }
+        for (int i = 0; i < args.length - 1; i++) {
+            arguments.put(args[i], args[++i]);
         }
-        return rsl;
     }
 
     public String directory() {
-        return getArgument("-d");
+        return arguments.get("-d");
     }
 
     public String exclude() {
-        return getArgument("-e");
+        return arguments.get("-e");
     }
 
     public String output() {
-        return getArgument("-o");
+        return arguments.get("-o");
     }
 }
