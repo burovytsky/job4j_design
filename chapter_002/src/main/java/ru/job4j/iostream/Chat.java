@@ -1,22 +1,19 @@
 package ru.job4j.iostream;
 
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 
 public class Chat {
+    private static final String EXIT = "закончить";
+    private static final String STOP = "стоп";
+    private static final String RESUME = "продолжить";
+
     public List<String> getList(String source) {
         List<String> rsl = new ArrayList<>();
-        try (FileInputStream in = new FileInputStream(source)) {
-            StringBuilder text = new StringBuilder();
-            int read;
-            while ((read = in.read()) != -1) {
-                char readChar = (char) read;
-                text.append(readChar);
+        try (BufferedReader in = new BufferedReader(new FileReader(source))) {
+            while (in.ready()) {
+                rsl.addAll(Arrays.asList(in.readLine().split(" ")));
             }
-            rsl = Arrays.asList(text.toString().split(" "));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -33,29 +30,32 @@ public class Chat {
         }
     }
 
-    public void chatRun() {
-        List<String> list = getList("./chapter_002/data/text.txt");
+    public void chatRun(String source, String save) {
+        List<String> list = getList(source);
         List<String> log = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         String userMessage = "";
-        while (!userMessage.equals("закончить")) {
+        while (!userMessage.equals(EXIT)) {
             userMessage = input.nextLine();
             log.add("user: " + userMessage);
-            if (!userMessage.equals("стоп")) {
+            if (!userMessage.equals(STOP)) {
                 String pcMessage = list.get((int) (Math.random() * list.size()));
                 log.add("pc: " + pcMessage);
                 System.out.println(pcMessage);
             } else {
-                while (!userMessage.equals("продолжить")) {
+                while (!userMessage.equals(RESUME)) {
                     userMessage = input.nextLine();
                     log.add("user: " + userMessage);
                 }
             }
         }
-        save(log, "./chapter_002/data/log.txt");
+        save(log, save);
     }
 
     public static void main(String[] args) {
-        new Chat().chatRun();
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Arguments not found");
+        }
+        new Chat().chatRun(args[0], args[1]);
     }
 }

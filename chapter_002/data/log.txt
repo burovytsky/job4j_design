@@ -1,16 +1,16 @@
-user: тест
-pc:when
-user: чата
-pc:program
+user: hi
+pc: thread,
+user: test chat
+pc: task
+user: test
+pc: can
 user: стоп
-user: па
-user: са
+user: test stop
+user: still 
 user: продолжить
-user: можно
-pc:can
-user: можно
-pc:Java
-user: сто
-pc:implementing
+user: 
+pc: application
+user: test resume
+pc: by
 user: закончить
-pc:at
+pc: two
