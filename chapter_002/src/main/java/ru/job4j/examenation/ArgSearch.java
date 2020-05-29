@@ -46,12 +46,27 @@ public class ArgSearch {
     public Predicate<Path> exclude() {
         Predicate<Path> filePredicate = null;
         if (arguments.containsKey("-r")) {
-            filePredicate = path -> (path.getFileName().toString().contains(searchFile()));
+            filePredicate = path -> (path.getFileName().toString().matches(preparePattern(searchFile())));
         } else if (arguments.containsKey("-f")) {
             filePredicate = path -> path.getFileName().toString().equals(searchFile());
         } else if (arguments.containsKey("-m")) {
             filePredicate = path -> path.getFileName().endsWith(searchFile());
         }
         return filePredicate;
+    }
+
+    private static String preparePattern(String pattern) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < pattern.length(); i++) {
+            char c = pattern.charAt(i);
+            if (c == '*') {
+                sb.append(".*");
+            } else if (c == '.') {
+                sb.append("\\.");
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }
