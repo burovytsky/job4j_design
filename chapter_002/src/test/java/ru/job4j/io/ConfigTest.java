@@ -1,6 +1,7 @@
-package ru.job4j.iostream;
+package ru.job4j.io;
 
 import org.junit.Test;
+import ru.job4j.io.iostream.Config;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;

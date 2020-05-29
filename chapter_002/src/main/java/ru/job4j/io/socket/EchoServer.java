@@ -1,8 +1,8 @@
-package ru.job4j.socket;
+package ru.job4j.io.socket;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.job4j.logging.UsageLog4j;
+import ru.job4j.io.logging.UsageLog4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;

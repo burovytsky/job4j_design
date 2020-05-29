@@ -1,4 +1,4 @@
-package ru.job4j.examenation;
+package ru.job4j.io.iostream;
 
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
@@ -23,9 +23,9 @@ public class SearchFiles extends SimpleFileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
-        if (predicate.test(path)) {
-            rsl.add(path);
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+        if (predicate.test(file)) {
+            rsl.add(file);
         }
         return CONTINUE;
     }

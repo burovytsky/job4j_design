@@ -13,6 +13,6 @@ Search.html
 Search.java.html
 SearchFiles.html
 SearchFiles.java.html
-ru.job4j.iostream.SearchTest.txt
-TEST-ru.job4j.iostream.SearchTest.xml
+SearchTest.txt
+TEST-SearchTest.xml
 SearchTest.class

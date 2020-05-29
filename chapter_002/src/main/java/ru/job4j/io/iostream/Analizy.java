@@ -1,10 +1,8 @@
-package ru.job4j.iostream;
+package ru.job4j.io.iostream;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class Analizy {
     private List<String> rsl = new ArrayList<>();

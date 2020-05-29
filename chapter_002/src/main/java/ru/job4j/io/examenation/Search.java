@@ -1,4 +1,4 @@
-package ru.job4j.examenation;
+package ru.job4j.io.examenation;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package ru.job4j.examenation;
+package ru.job4j.io.examenation;
 
 import java.nio.file.Path;
 import java.util.HashMap;
