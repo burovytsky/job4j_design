@@ -1,0 +1,6 @@
+Petr1 Arsentev;p1arsentev@yandex.ru;
+Ivan1 Ivanov;i1ivanov@gmail.com;
+Petr2 Arsentev;p2arsentev@yandex.ru;
+Ivan2 Ivanov;i2ivanov@gmail.com;
+Petr3 Arsentev;p3arsentev@yandex.ru;
+Ivan3 Ivanov;iivan3ov@gmail.com;
