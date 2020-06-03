@@ -29,9 +29,8 @@ select * from product
 where name like '%мороженное%';
 
 --3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце.
-select * from product as p
-where extract(month from p.expired_date) - extract(month from current_date) = 1;
-
+SELECT * FROM product as p
+where extract(month from p.expired_date) = extract(month from (current_date + INTERVAL '1' month));
 --4. Написать запрос, который выводит самый дорогой продукт.
 select * from product
 where price = (select max(price) from product);
