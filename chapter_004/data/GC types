@@ -1,0 +1,52 @@
+2.Оценить поведения срабатывания различных типов сборщиков мусора для программы из первого урока данной модуля.
+
+Заданы параметры запуска -Xmx4m -XX:+UseSerialGC -Xloggc:lo.log
+
+[0.015s][info][gc] Using Serial
+[0.176s][info][gc] GC(0) Pause Young (Allocation Failure) 1M->0M(3M) 3.549ms
+[0.265s][info][gc] GC(1) Pause Young (Allocation Failure) 1M->1M(3M) 3.356ms
+[0.290s][info][gc] GC(2) Pause Young (Allocation Failure) 2M->2M(3M) 4.341ms
+[0.299s][info][gc] GC(3) Pause Young (Allocation Failure) 3M->3M(3M) 0.041ms
+[0.308s][info][gc] GC(4) Pause Full (Allocation Failure) 3M->2M(3M) 9.388ms
+
+Заданы параметры запуска -Xmx4m -XX:+UseParallelGC -Xloggc:lo.log
+
+[0.013s][info][gc] Using Parallel
+[0.079s][info][gc] GC(0) Pause Young (Allocation Failure) 0M->0M(3M) 2.521ms
+[0.117s][info][gc] GC(1) Pause Young (Allocation Failure) 0M->0M(3M) 1.335ms
+[0.172s][info][gc] GC(2) Pause Young (Allocation Failure) 1M->0M(3M) 1.448ms
+[0.201s][info][gc] GC(3) Pause Young (Allocation Failure) 1M->1M(3M) 1.471ms
+[0.211s][info][gc] GC(4) Pause Young (Allocation Failure) 1M->1M(3M) 2.727ms
+[0.221s][info][gc] GC(5) Pause Young (Allocation Failure) 1M->1M(3M) 2.647ms
+[0.230s][info][gc] GC(6) Pause Young (Allocation Failure) 2M->2M(3M) 2.974ms
+[0.245s][info][gc] GC(7) Pause Full (Ergonomics) 2M->1M(3M) 14.646ms
+[0.255s][info][gc] GC(8) Pause Young (Allocation Failure) 2M->2M(3M) 2.123ms
+[0.263s][info][gc] GC(9) Pause Full (Ergonomics) 2M->1M(3M) 7.640ms
+[0.269s][info][gc] GC(10) Pause Young (Allocation Failure) 1M->1M(3M) 1.423ms
+[0.273s][info][gc] GC(11) Pause Young (Allocation Failure) 2M->1M(3M) 1.583ms
+
+Заданы параметры запуска -Xmx4m -XX:+UseG1GC -Xloggc:lo.log
+
+[0.018s][info][gc] Using G1
+[0.052s][info][gc] Periodic GC disabled
+[0.163s][info][gc] GC(0) Pause Young (Normal) (G1 Evacuation Pause) 1M->0M(4M) 3.256ms
+[0.257s][info][gc] GC(1) Pause Young (Normal) (G1 Evacuation Pause) 1M->1M(4M) 3.239ms
+[0.278s][info][gc] GC(2) Pause Young (Normal) (G1 Evacuation Pause) 2M->1M(4M) 5.397ms
+[0.295s][info][gc] GC(3) To-space exhausted
+[0.295s][info][gc] GC(3) Pause Young (Normal) (G1 Evacuation Pause) 2M->3M(4M) 5.979ms
+[0.312s][info][gc] GC(4) To-space exhausted
+[0.312s][info][gc] GC(4) Pause Young (Concurrent Start) (G1 Evacuation Pause) 4M->4M(4M) 6.606ms
+[0.312s][info][gc] GC(5) Concurrent Cycle
+[0.322s][info][gc] GC(6) Pause Full (G1 Evacuation Pause) 4M->1M(4M) 9.751ms
+[0.322s][info][gc] GC(5) Concurrent Cycle 9.976ms
+
+При одинаковых параметрах запуска ParallelGC запускался(останавливал программу) чаще. А G1 периодически выбивал "To-space exhausted" это
+означает что в куче недостаточно свободного места и она не может быть расширена.
+
+3. Как вы считаете какой из сборщиков мусора подойдет наиболее оптимально для приложения заявок из второго модуля?
+Думаю, что ParallelGC или даже SerialGC, так как приложение не требовательное. Удаление объектов не частое. Паузы STW
+не повлияют на скорость
+
+4. Какой тип сборщика будет оптимален для серверного приложения?
+Garbage-First (G1)  - хорошо подходит для серверных приложений, работающих на многопроцессорных серверах
+и оперирующих большими объемами данных

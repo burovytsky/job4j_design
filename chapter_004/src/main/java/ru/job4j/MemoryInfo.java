@@ -3,7 +3,7 @@ package ru.job4j;
 public class MemoryInfo {
     public static void main(String[] args) {
         memInfo();
-        for (int i = 0; i < 600; i++) {
+        for (int i = 0; i < 20000; i++) {
           new User("name"+i, "s"+i);
         }
         memInfo();
