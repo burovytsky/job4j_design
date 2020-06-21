@@ -1,4 +1,4 @@
-package ru.job4j.tdd;
+package ru.job4j.tdd.cinematdd;
 
 public class AccountCinema implements Account {
     @Override

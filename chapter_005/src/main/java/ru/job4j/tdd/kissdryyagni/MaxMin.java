@@ -1,4 +1,4 @@
-package ru.job4j.tdd;
+package ru.job4j.tdd.kissdryyagni;
 
 import java.util.Comparator;
 import java.util.List;

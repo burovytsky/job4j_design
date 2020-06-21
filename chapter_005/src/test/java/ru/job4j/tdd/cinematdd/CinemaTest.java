@@ -1,7 +1,6 @@
-package ru.job4j.tdd;
+package ru.job4j.tdd.cinematdd;
 
 import org.junit.Ignore;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Calendar;
