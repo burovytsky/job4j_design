@@ -4,11 +4,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class ReportHR implements Report {
-    protected final Store store;
-
-    public ReportHR(Store store) {
-        this.store = store;
+public class ReportHRHtml extends ReportHR {
+    public ReportHRHtml(Store store) {
+        super(store);
     }
 
     @Override
@@ -16,13 +14,16 @@ public class ReportHR implements Report {
         StringBuilder text = new StringBuilder();
         List<Employee> hrList = store.findBy(filter);
         hrList.sort(Comparator.comparingDouble(Employee::getSalary).reversed());
-        text.append("Name; Salary;");
+        text.append("<!DOCTYPE html><html>")
+                .append("<meta charset=\"utf-8\">")
+                .append("<head><title>Report</title></head><body>")
+                .append("<h1>Name; Salary;</h1>");
         for (Employee employee : hrList) {
-            text.append(System.lineSeparator())
-                    .append(employee.getName()).append(";")
+            text.append(employee.getName()).append(";")
                     .append(employee.getSalary()).append(";")
                     .append(System.lineSeparator());
         }
+        text.append("</body></html>");
         return text.toString();
     }
 }
