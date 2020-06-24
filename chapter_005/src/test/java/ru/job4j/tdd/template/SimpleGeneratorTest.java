@@ -1,6 +1,7 @@
 package ru.job4j.tdd.template;
 
 import org.junit.Ignore;
+import org.junit.Test;
 
 import java.util.*;
 
@@ -21,7 +22,8 @@ public class SimpleGeneratorTest {
     }
 
     @Ignore
-    public void whenThereAreNotKeyInMap() throws Exception {
+    @Test(expected = Exception.class)
+    public void whenThereAreNotKeyInMap(){
         SimpleGenerator generator = new SimpleGenerator();
         String template = "I am a ${name}, Who are ${subject}?";
         Map<String, String> words = new HashMap<>();
@@ -30,7 +32,8 @@ public class SimpleGeneratorTest {
     }
 
     @Ignore
-    public void whenThereIsAnExtraKeyInTheCard() throws Exception {
+    @Test(expected = Exception.class)
+    public void whenThereIsAnExtraKeyInTheCard(){
         SimpleGenerator generator = new SimpleGenerator();
         String template = "I am a ${name}";
         Map<String, String> words = new HashMap<>();
