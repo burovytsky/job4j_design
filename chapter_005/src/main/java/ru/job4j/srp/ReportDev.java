@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class ReportDev implements Report {
-    private final Store store;
+    protected final Store store;
 
     public ReportDev(Store store) {
         this.store = store;
