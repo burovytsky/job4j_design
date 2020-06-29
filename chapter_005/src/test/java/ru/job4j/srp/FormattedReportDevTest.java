@@ -15,7 +15,7 @@ public class FormattedReportDevTest {
         Calendar now = Calendar.getInstance();
         Employee worker1 = new Employee("Ivan", now, now, 600);
         store.add(worker1);
-        FormattedReport hr = new FormattedReportDev(store);
+        FormattedReport hr = new FormattedReportDev(new ReportDev(store));
         StringBuilder expected = new StringBuilder();
         expected.append("Json tags")
                 .append(System.lineSeparator())
@@ -36,7 +36,7 @@ public class FormattedReportDevTest {
         Calendar now = Calendar.getInstance();
         Employee worker1 = new Employee("Petr", now, now, 1000);
         store.add(worker1);
-        FormattedReport hr = new FormattedReportDev(store);
+        FormattedReport hr = new FormattedReportDev(new ReportDev(store));
         StringBuilder expected = new StringBuilder();
         expected.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><employers>")
                 .append(System.lineSeparator())
