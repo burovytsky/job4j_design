@@ -1,10 +1,9 @@
-package ru.job4j.lsp;
-
+package ru.job4j.lsp.product_store;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shop implements FoodStore {
+public class Trash implements FoodStore {
     List<Food> foodList = new ArrayList<>();
 
     @Override

@@ -1,4 +1,4 @@
-package ru.job4j.lsp;
+package ru.job4j.lsp.product_store;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
