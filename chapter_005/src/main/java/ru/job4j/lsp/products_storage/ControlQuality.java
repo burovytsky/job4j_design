@@ -1,0 +1,21 @@
+package ru.job4j.lsp.products_storage;
+
+import java.util.List;
+
+public class ControlQuality {
+
+    private List<Storage> allStorage;
+
+    public ControlQuality(List<Storage> allStorage) {
+        this.allStorage = allStorage;
+    }
+
+    public void distribute(Food food) {
+        for (Storage storage : allStorage) {
+            if (storage.accept(food)) {
+                storage.add(food);
+                break;
+            }
+        }
+    }
+}
