@@ -59,9 +59,9 @@ public class Food {
     }
 
     public int getProductExpirationDate() {
-        int shelfLife = (int) ChronoUnit.DAYS.between(getExpireDate(), getCreateDate());
-        int daysPassed = (int) ChronoUnit.DAYS.between(LocalDateTime.now(), getCreateDate());
-        return 100 - (daysPassed * 100) / shelfLife;
+        int shelfLife = (int) ChronoUnit.DAYS.between(getCreateDate(), getExpireDate());
+        int daysPassed = (int) ChronoUnit.DAYS.between(getCreateDate(), LocalDateTime.now());
+        return (daysPassed * 100) / shelfLife;
     }
 
     @Override
