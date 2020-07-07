@@ -1,9 +1,13 @@
 package ru.job4j.lsp.car_parking;
 
-public interface Parking {
-    void park(Car car);
+import java.util.Map;
 
-    void leaveParking(Car car);
+public interface Parking {
+    boolean park(Car car);
+
+    Car leaveParking(String carNumber);
 
     boolean checkFreePlaces();
+
+    Map<String, Car> getCars();
 }
