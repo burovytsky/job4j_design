@@ -3,22 +3,22 @@ package ru.job4j.lsp.car_parking;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TruckParking implements Parking {
-    private final int parkingPlaces;
+public class CarParking implements Parking {
     private Map<String, Car> carMap = new HashMap<>();
-    private int occupiedPlaces;
+    private int sumPlaces;
 
-    public TruckParking(int parkingPlaces) {
-        this.parkingPlaces = parkingPlaces;
+    public CarParking(int autoCount, int truckCount) {
+        this.sumPlaces = autoCount + truckCount;
     }
 
     @Override
     public boolean park(Car car) {
-        if (checkFreePlaces() && car.getSize() == 2 && !carMap.containsKey(car.getNumber())) {
+        if (checkFreePlaces(car)) {
             carMap.put(car.getNumber(), car);
-            occupiedPlaces += car.getSize();
+            sumPlaces -= car.getSize();
             return true;
         }
+        System.out.println("Mest net");
         return false;
     }
 
@@ -26,19 +26,20 @@ public class TruckParking implements Parking {
     public Car leaveParking(String carNumber) {
         Car rsl = null;
         if (carMap.containsKey(carNumber)) {
-            occupiedPlaces -= 2;
             rsl = carMap.remove(carNumber);
+            sumPlaces -= rsl.getSize();
         }
         return rsl;
     }
 
     @Override
-    public boolean checkFreePlaces() {
-        return occupiedPlaces < parkingPlaces;
+    public boolean checkFreePlaces(Car car) {
+        return sumPlaces >= car.getSize();
     }
 
     @Override
     public Map<String, Car> getCars() {
         return carMap;
     }
+
 }

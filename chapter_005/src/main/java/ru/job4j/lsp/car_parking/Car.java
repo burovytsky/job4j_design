@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Car {
 
     private String name;
-    private String number;
-    private int size;
+    private final String number;
+    private final int size;
 
     public Car(String name, String number, int size) {
         this.name = name;
@@ -26,17 +26,10 @@ public class Car {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public int getSize() {
         return size;
     }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
 
     @Override
     public boolean equals(Object o) {
