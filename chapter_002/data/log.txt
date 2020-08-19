@@ -13,4 +13,4 @@ pc: application
 user: test resume
 pc: by
 user: закончить
-pc: two
+pc: tw
