@@ -10,7 +10,3 @@ hibernate.connection.passwordpassword
 
 hibernate.connection.class=org.postgresql.Driver
 hibernate.connection.postgres
-Some code
-Some code 2
-Some code 3
-Some code 4
