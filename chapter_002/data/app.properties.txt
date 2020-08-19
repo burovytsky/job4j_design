@@ -10,3 +10,4 @@ hibernate.connection.passwordpassword
 
 hibernate.connection.class=org.postgresql.Driver
 hibernate.connection.postgres
+3.3. Объединение зафиксированых изменений. [#329948]
